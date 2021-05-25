@@ -1,14 +1,14 @@
-on: [push]
+name: Add a comment
+on: 
+  pull_request:
+    types: [closed]
 jobs:
-  hello_world_job:
+  sync:
     runs-on: ubuntu-latest
-    name: A job to say hello
     steps:
-      - name: Hello world action step
-        id: hello
-        uses: devevignesh/git-asana-action@v1
+      - uses: devevignesh/git-asana-action@v1
+        if: github.event.pull_request.merged == true
         with:
-          who-to-greet: 'Mona the Octocat'
-      # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+          asana-pat: ${{ secrets.ASANA_PAT }}
+          task-comment: 'PR: '
+          trigger-phrase: 'Asana Task:'
