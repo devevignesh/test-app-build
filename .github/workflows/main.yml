@@ -6,9 +6,9 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: devevignesh/git-asana-action@v4
+      - uses: devevignesh/git-asana-action@v5
         if: github.event.pull_request.merged == true
         with:
           asana-pat: ${{ secrets.ASANA_PAT }}
-          task-comment: 'PR: '
-          trigger-phrase: 'Asana Task:'
+          task-comment: 'View Pull Request Here: '
+          trigger-phrase: "\\*\\*Asana Task:\\*\\*"
