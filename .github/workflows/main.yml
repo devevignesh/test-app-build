@@ -19,7 +19,7 @@ jobs:
       - name: Run build
         run: yarn build
       - name: Use cp-action
-        uses: devevignesh/cp-to-repo@v4
+        uses: devevignesh/cp-to-repo@v5
         with:
           api-token-github: ${{ secrets.GIT_API_TOKEN }}
           source-directory: 'build/index.html'
