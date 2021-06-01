@@ -19,9 +19,9 @@ jobs:
       - name: Run build
         run: yarn build
       - name: Use cp-action
-        uses: devevignesh/cp-to-repo@v1
+        uses: devevignesh/cp-to-repo@v2
         with:
-          api-token-github: ${{ secrets.ASANA_PAT }}
+          api-token-github: ${{ secrets.GIT_API_TOKEN }}
           source-directory: 'build'
           destination-github-username: 'devevignesh'
           destination-repository-name: 'react-hooks'
