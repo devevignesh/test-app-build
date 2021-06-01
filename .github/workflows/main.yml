@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
@@ -19,7 +19,7 @@ jobs:
       - name: Run build
         run: yarn build
       - name: Use cp-action
-        uses: devevignesh/cp-to-repo@v2
+        uses: devevignesh/cp-to-repo@v3
         with:
           api-token-github: ${{ secrets.GIT_API_TOKEN }}
           source-directory: 'build/index.html'
