@@ -1,12 +1,13 @@
-name: Node.js CI
+name: Share data between jobs
 
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
+
 jobs:
-  build:
+  job_1:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -18,11 +19,26 @@ jobs:
         run: yarn
       - name: Run build
         run: yarn build
+      - name: Upload build
+        uses: actions/upload-artifact@v2
+        with:
+          name: buildfile
+          path: build/index.html
+
+  job_2:
+    name: Copy build file
+    needs: job_1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download build file for job 1
+        uses: actions/download-artifact@v2
+        with:
+          name: buildfile
       - name: Use cp-action
         uses: devevignesh/cp-to-repo@v7
         with:
           api-token-github: ${{ secrets.GIT_API_TOKEN }}
-          source-directory: 'build/index.html'
+          source-directory: 'buildfile'
           destination-github-username: 'devevignesh'
           destination-repository-name: 'react-hooks'
           user-email: vigneshe1992@gmail.com
