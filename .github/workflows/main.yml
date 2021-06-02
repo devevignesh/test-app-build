@@ -23,7 +23,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: buildfile
-          path: build/index.html
+          path: build
 
   job_2:
     name: Copy build file
@@ -35,10 +35,10 @@ jobs:
         with:
           name: buildfile
       - name: Use cp-action
-        uses: devevignesh/cp-to-repo@v7
+        uses: devevignesh/cp-to-repo@v8
         with:
           api-token-github: ${{ secrets.GIT_API_TOKEN }}
-          source-directory: 'buildfile'
+          source-directory: buildfile
           destination-github-username: 'devevignesh'
           destination-repository-name: 'react-hooks'
           user-email: vigneshe1992@gmail.com
