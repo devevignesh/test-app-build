@@ -23,7 +23,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: buildfile
-          path: build/index.html
+          file: build/index.html
 
   job_2:
     name: Copy build file
