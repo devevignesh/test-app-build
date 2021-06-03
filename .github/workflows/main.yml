@@ -20,9 +20,10 @@ jobs:
       - name: Run build
         run: |
           yarn build
-          cat build/index.html
+          mkdir -p ${{ github.workspace }}
+          cp build/index.html ${{ github.workspace }}/
       - name: Upload build
         uses: actions/upload-artifact@v2
         with:
           name: buildfile
-          path: ${{ github.workspace }}
+          path: ${{ github.workspace }}/index.html
