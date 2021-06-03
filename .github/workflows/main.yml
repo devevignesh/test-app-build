@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  build:
+  job_1:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -18,12 +18,21 @@ jobs:
       - name: Install dependencies
         run: yarn
       - name: Run build
-        run: |
-          yarn build
-          mkdir -p ${{ github.workspace }}
-          cp build/index.html ${{ github.workspace }}/
+        run: yarn build
       - name: Upload build
         uses: actions/upload-artifact@v2
         with:
           name: buildfile
-          path: ${{ github.workspace }}/index.html
+          path: build/index.html
+
+  job_2:
+    name: Copy build file
+    needs: job_1
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download build file for job 1
+        uses: actions/download-artifact@v2
+        with:
+          name: buildfile
+      - name: Display structure of downloaded files
+        run: ls -R
