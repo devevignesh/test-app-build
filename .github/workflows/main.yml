@@ -18,12 +18,12 @@ jobs:
       - name: Run build
         run: |
           yarn build
-          cp build/index.html ${{ github.workspace }}/artifact/
+          cp build/index.html ${{ github.workspace }}/
       - name: Upload build
         uses: actions/upload-artifact@v2
         with:
           name: buildfile
-          path: ${{ github.workspace }}/artifact
+          path: ${{ github.workspace }}
   job_2:
     name: Copy build file
     needs: job_1
