@@ -30,15 +30,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Download build file for job 1
-        uses: actions/download-artifact@v2
-        with:
-          name: buildfile
       - name: Display structure of downloaded files
         run: |
           ls
       - name: Use cp-action
-        uses: devevignesh/cp-to-repo@v11
+        uses: devevignesh/cp-to-repo@v12
         with:
           api-token-github: ${{ secrets.GIT_API_TOKEN }}
           source-file: ${{ github.workspace }}
