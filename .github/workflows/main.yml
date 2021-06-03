@@ -26,3 +26,19 @@ jobs:
         with:
           name: buildfile
           path: ~/new/artifact/index.html
+          
+  job_2:
+    name: Copy build file
+    needs: job_1
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Download build file for job 1
+        uses: actions/download-artifact@v2
+        with:
+          name: buildfile
+          path: ~/new/artifact
+      - name: Display structure of downloaded files
+        run: |
+          ls
+          cat index.html
