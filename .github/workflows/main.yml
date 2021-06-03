@@ -34,10 +34,10 @@ jobs:
         run: |
           ls
       - name: Use cp-action
-        uses: devevignesh/cp-to-repo@v12
+        uses: devevignesh/cp-to-repo@v13
         with:
           api-token-github: ${{ secrets.GIT_API_TOKEN }}
-          source-file: ${{ github.workspace }}
+          source-dir: ${{ github.workspace }}
           destination-github-username: 'devevignesh'
           destination-repository-name: 'react-hooks'
           user-email: vigneshe1992@gmail.com
