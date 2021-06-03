@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 jobs:
-  job_1:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -23,22 +23,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: buildfile
-          path: build/index.html
-
-  job_2:
-    name: Copy build file
-    needs: job_1
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download build file for job 1
-        uses: actions/download-artifact@v2
-        with:
-          name: buildfile
-      - name: Use cp-action
-        uses: devevignesh/cp-to-repo@v9
-        with:
-          api-token-github: ${{ secrets.GIT_API_TOKEN }}
-          source-file: index.html
-          destination-github-username: 'devevignesh'
-          destination-repository-name: 'react-hooks'
-          user-email: vigneshe1992@gmail.com
+          path: ${{ github.workspace }}
