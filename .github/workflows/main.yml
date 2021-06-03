@@ -52,9 +52,8 @@ jobs:
           cp ${{ github.workspace }}/index.html "$TEMP_DIR"/src/.
           echo "Files that will be pushed"
           cd "$TEMP_DIR"
-          cat src/index.html
-          ls
-          echo "git add src/index.html"
+          git add src/index.html
+          git status
           echo "git commit"
           git commit -m "build file"
           echo "git push origin"
