@@ -36,3 +36,12 @@ jobs:
           name: buildfile
       - name: Display structure of downloaded files
         run: ls -R
+        working-directory: build/index.html
+      - name: Use cp-action
+        uses: devevignesh/cp-to-repo@v9
+        with:
+          api-token-github: ${{ secrets.GIT_API_TOKEN }}
+          source-file: build/index.html
+          destination-github-username: 'devevignesh'
+          destination-repository-name: 'react-hooks'
+          user-email: vigneshe1992@gmail.com
