@@ -1,5 +1,4 @@
 name: Share data between jobs
-
 on:
   push:
     branches: [main]
@@ -18,23 +17,23 @@ jobs:
       - name: Install dependencies
         run: yarn
       - name: Run build
-        run: yarn build
+        run: |
+          yarn build
+          cp build/index.html ${{ github.workspace }}/
       - name: Upload build
         uses: actions/upload-artifact@v2
         with:
           name: buildfile
-          file: build/index.html
+          path: ${{ github.workspace }}/index.html
 
   job_2:
     name: Copy build file
     needs: job_1
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
       - name: Download build file for job 1
         uses: actions/download-artifact@v2
         with:
           name: buildfile
-          path: build/index.html
       - name: Display structure of downloaded files
         run: ls -R
