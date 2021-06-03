@@ -18,34 +18,11 @@ jobs:
         run: yarn
       - name: Run build
         run: |
+          mkdir -p ~/new/artifact
           yarn build
-          cp build/index.html ${{ github.workspace }}/
+          cp build/index.html ~/new/artifact/
       - name: Upload build
         uses: actions/upload-artifact@v2
         with:
           name: buildfile
-          path: ${{ github.workspace }}/index.html
-
-  job_2:
-    name: Copy build file
-    needs: job_1
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Download build file for job 1
-        uses: actions/download-artifact@v2
-        with:
-          name: buildfile
-          path: ${{ github.workspace }}
-      - name: Display structure of downloaded files
-        run: |
-          ls
-          cat index.html
-      - name: Use cp-action
-        uses: devevignesh/cp-to-repo@v10
-        with:
-          api-token-github: ${{ secrets.GIT_API_TOKEN }}
-          source-file: ${{ github.workspace }}
-          destination-github-username: 'devevignesh'
-          destination-repository-name: 'react-hooks'
-          user-email: vigneshe1992@gmail.com
+          path: ~/new/artifact/index.html
