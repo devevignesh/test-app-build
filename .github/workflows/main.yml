@@ -36,4 +36,5 @@ jobs:
         with:
           name: buildfile
       - name: Display structure of downloaded files
-        run: ls -R
+        run: |
+          cat buildfile
