@@ -38,7 +38,7 @@ jobs:
         run: |
           ls
       - name: Use cp-action
-        uses: devevignesh/cp-to-repo@v7
+        uses: devevignesh/cp-to-repo@v11
         with:
           api-token-github: ${{ secrets.GIT_API_TOKEN }}
           source-directory: ${{ github.workspace }}
