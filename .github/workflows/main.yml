@@ -39,9 +39,12 @@ jobs:
         run: |
           ls
       - name: Use cp-action
+        shell: bash
         run: |
           TEMP_DIR=$(mktemp -d)
           echo "Cloning destination git repository"
+          git config --global user.email "vigneshe1992@gmail.com"
+          git config --global user.name "devevignesh"
           git clone -n "https://devevignesh:${{ secrets.GIT_API_TOKEN }}@github.com/devevignesh/react-hooks.git" --depth 1 "$TEMP_DIR"
           cd "$TEMP_DIR"
           git reset HEAD
