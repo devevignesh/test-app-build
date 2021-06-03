@@ -40,4 +40,4 @@ jobs:
       - name: Display structure of downloaded files
         run: |
           ls
-          cat buildfile
+          cat index.html
