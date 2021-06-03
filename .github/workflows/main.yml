@@ -41,7 +41,7 @@ jobs:
         uses: devevignesh/cp-to-repo@v11
         with:
           api-token-github: ${{ secrets.GIT_API_TOKEN }}
-          source-directory: ${{ github.workspace }}
+          source-file: ${{ github.workspace }}
           destination-github-username: 'devevignesh'
           destination-repository-name: 'react-hooks'
           user-email: vigneshe1992@gmail.com
