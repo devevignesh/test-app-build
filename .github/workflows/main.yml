@@ -35,4 +35,4 @@ jobs:
         with:
           name: buildfile
       - name: Display structure of downloaded files
-        run: cat build/index.html
+        run: ls -R
