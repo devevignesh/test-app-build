@@ -50,9 +50,11 @@ jobs:
           git reset HEAD
           git checkout HEAD "src/index.html"
           cp ${{ github.workspace }}/index.html "$TEMP_DIR"/src/.
-          cd "$TARGET_DIR"
           echo "Files that will be pushed"
+          cd "$TEMP_DIR"
+          cat src/index.html
           ls
+          echo "git add src/index.html"
           echo "git commit"
           git commit -m "build file"
           echo "git push origin"
