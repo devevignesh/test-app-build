@@ -35,7 +35,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: buildfile
-          path: ${{ github.workspace }}/index.html
+          path: ${{ github.workspace }}
       - name: Use cp-action
         shell: bash
         run: |
@@ -47,9 +47,8 @@ jobs:
           cd "$TEMP_DIR"
           git reset HEAD
           git checkout HEAD "src/index.html"
-          cp index.html "$TEMP_DIR"/src/.
+          cp ${{ github.workspace }}/index.html "$TEMP_DIR"/src/.
           echo "Files that will be pushed"
-          cd "$TEMP_DIR"
           git add src/index.html
           git status
           echo "git commit"
