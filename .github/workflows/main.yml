@@ -1,4 +1,4 @@
-name: Share data between jobs
+name: Build and Deploy
 on:
   push:
     branches: [main]
@@ -6,6 +6,7 @@ on:
     branches: [main]
 jobs:
   job_1:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -25,19 +26,16 @@ jobs:
           name: buildfile
           path: ${{ github.workspace }}/index.html
   job_2:
-    name: Copy build file
+    name: Deploy
     needs: job_1
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Download build file for job 1
+      - name: Download build file
         uses: actions/download-artifact@v2
         with:
           name: buildfile
-          path: ${{ github.workspace }}
-      - name: Display structure of downloaded files
-        run: |
-          ls
+          path: ${{ github.workspace }}/index.html
       - name: Use cp-action
         shell: bash
         run: |
@@ -49,7 +47,7 @@ jobs:
           cd "$TEMP_DIR"
           git reset HEAD
           git checkout HEAD "src/index.html"
-          cp ${{ github.workspace }}/index.html "$TEMP_DIR"/src/.
+          cp index.html "$TEMP_DIR"/src/.
           echo "Files that will be pushed"
           cd "$TEMP_DIR"
           git add src/index.html
