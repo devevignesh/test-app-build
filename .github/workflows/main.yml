@@ -17,42 +17,10 @@ jobs:
       - name: Run build
         run: |
           yarn build
-          cp build/index.html ${{ github.workspace }}/
-      - name: Upload build
-        uses: actions/upload-artifact@v2
+      - name: Upload build files to S3
+        uses: devevignesh/S3-deploy-gh-action@v1
         with:
-          name: buildfile
-          path: ${{ github.workspace }}/index.html
-  job_2:
-    name: Deploy
-    needs: job_1
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Download build file
-        uses: actions/download-artifact@v2
-        with:
-          name: buildfile
-          path: ${{ github.workspace }}
-      - name: Use cp-action
-        shell: bash
-        run: |
-          TEMP_DIR=$(mktemp -d)
-          TARGET_BRANCH="client-${{ github.event.release.tag_name }}"
-          echo "Cloning destination git repository"
-          git config --global user.email ${{ secrets.EMAIL }}
-          git config --global user.name "devevignesh"
-          git clone -n "https://devevignesh:${{ secrets.GIT_API_TOKEN }}@github.com/devevignesh/react-hooks.git" --depth 1 "$TEMP_DIR"
-          cd "$TEMP_DIR"
-          git reset HEAD
-          git checkout HEAD "src/index.html"
-          cp ${{ github.workspace }}/index.html "$TEMP_DIR"/src/.
-          echo "Files that will be pushed"
-          git add src/index.html
-          git checkout -b "$TARGET_BRANCH"
-          git status
-          echo "git commit"
-          git commit -m "build file"
-          echo "git push origin"
-          git push "https://devevignesh:${{ secrets.GIT_API_TOKEN }}@github.com/devevignesh/react-hooks.git" --set-upstream
-          echo "success"
+         release-tag-name: ${{ github.event.release.tag_name }}
+         source-dir: "build"
+         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
