@@ -1,7 +1,8 @@
 name: Build and Deploy
 on:
-  release:
-    types: [published]
+  push:
+    branches:
+        [main]
 jobs:
   job_1:
     name: Build
@@ -18,7 +19,7 @@ jobs:
         run: |
           yarn build
       - name: Upload build files to S3
-        uses: devevignesh/S3-deploy-gh-action@v1
+        uses: devevignesh/S3-deploy-gh-action@v1.0.1
         with:
          release-tag-name: ${{ github.event.release.tag_name }}
          source-dir: "build"
