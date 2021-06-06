@@ -38,8 +38,7 @@ jobs:
         shell: bash
         run: |
           TEMP_DIR=$(mktemp -d)
-          TARGET_BRANCH="client-$GITHUB_REF"
-          echo "client-${{ github.event.release.tag_name }}"
+          TARGET_BRANCH="client-${{ github.event.release.tag_name }}"
           echo "Cloning destination git repository"
           git config --global user.email ${{ secrets.EMAIL }}
           git config --global user.name "devevignesh"
@@ -50,9 +49,10 @@ jobs:
           cp ${{ github.workspace }}/index.html "$TEMP_DIR"/src/.
           echo "Files that will be pushed"
           git add src/index.html
+          git checkout -b "$TARGET_BRANCH"
           git status
           echo "git commit"
           git commit -m "build file"
           echo "git push origin"
-          git push "https://devevignesh:${{ secrets.GIT_API_TOKEN }}@github.com/devevignesh/react-hooks.git" --set-upstream "$TARGET_BRANCH"
+          git push "https://devevignesh:${{ secrets.GIT_API_TOKEN }}@github.com/devevignesh/react-hooks.git" --set-upstream
           echo "success"
