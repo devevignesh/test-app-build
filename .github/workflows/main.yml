@@ -19,7 +19,7 @@ jobs:
         run: |
           yarn build
       - name: Upload build files to S3
-        uses: devevignesh/S3-deploy-gh-action@v1.0.2
+        uses: devevignesh/S3-deploy-gh-action@v1.0.3
         with:
          release-tag-name: "v1.0.2"
          source-dir: "build"
