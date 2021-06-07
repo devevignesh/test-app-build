@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Hello!
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry.
         </p>
         <a
           className="App-link"
