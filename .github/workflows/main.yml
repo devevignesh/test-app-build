@@ -19,9 +19,5 @@ jobs:
         run: |
           yarn build
       - name: Upload build files to S3
-        uses: devevignesh/S3-deploy-gh-action@v1.0.3
-        with:
-         release-tag-name: "v1.0.2"
-         source-dir: "build"
-         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          aws s3 mb "s3://test-app-v1.0.0" --region us-east-1
