@@ -17,13 +17,13 @@ jobs:
       - name: Run build
         run: |
           yarn build
-      - name: Deploy build to S3
-        run: |
-          aws s3 mb "s3://test-app-${{ github.event.release.tag_name }}" --region us-east-1
-          aws s3 cp build/ "s3://test-app-${{ github.event.release.tag_name }}/" --recursive
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          cp build/ ${{ github.workspace }}/static/
+      - name: Upload build
+        uses: actions/upload-artifact@v2
+        with:
+          name: Build
+          path: ${{ github.workspace }}/static/
+        
           
   job_2:
     name: Deploy
@@ -31,31 +31,11 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-      - name: Download index.html from S3 bucket
+      - name: Download build
+        uses: actions/download-artifact@v2
+        with:
+          name: Build
+      - name: Display structure of downloaded files
         run: |
-          aws s3 cp "s3://test-app-${{ github.event.release.tag_name }}/index.html" ${{ github.workspace }}/
+          cd static
           ls
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      - name: Update index.html
-        run: |
-          TEMP_DIR=$(mktemp -d)
-          TARGET_BRANCH="test-app-${{ github.event.release.tag_name }}"
-          echo "Cloning destination git repository"
-          git config --global user.email ${{ secrets.EMAIL }}
-          git config --global user.name "devevignesh"
-          git clone -n "https://devevignesh:${{ secrets.GIT_API_TOKEN }}@github.com/devevignesh/react-hooks.git" --depth 1 "$TEMP_DIR"
-          cd "$TEMP_DIR"
-          git reset HEAD
-          git checkout HEAD "src/index.html"
-          cp ${{ github.workspace }}/index.html "$TEMP_DIR"/src/.
-          echo "Files that will be pushed"
-          git add src/index.html
-          git checkout -b "$TARGET_BRANCH"
-          git status
-          echo "git commit"
-          git commit -m "build file"
-          echo "git push origin"
-          git push "https://devevignesh:${{ secrets.GIT_API_TOKEN }}@github.com/devevignesh/react-hooks.git" --set-upstream
-          echo "success"
