@@ -18,7 +18,7 @@ jobs:
       - name: Run build
         run: |
           yarn build
-          cp build/ ${{ github.workspace }}/static/
+          cp -R build/ ${{ github.workspace }}/static/
       - name: Upload build
         uses: actions/upload-artifact@v2
         with:
