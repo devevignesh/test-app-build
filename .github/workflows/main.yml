@@ -47,9 +47,9 @@ jobs:
           cd "$TEMP_DIR"
           git reset HEAD
           git checkout HEAD "static"
-          cp -R ${{ github.workspace }}/static/ "$TEMP_DIR"/src/.
+          cp -R ${{ github.workspace }}/static/ "$TEMP_DIR"/.
           echo "Files that will be pushed"
-          git add src/*
+          git add "$TEMP_DIR"/*
           git checkout -b "$TARGET_BRANCH"
           git status
           echo "git commit"
