@@ -19,12 +19,12 @@ jobs:
       - name: Run build
         run: |
           yarn build
-          cp -R build/ ${{ github.workspace }}/static/
+          cp -R build/ ${{ github.workspace }}/staticFiles/
       - name: Upload build
         uses: actions/upload-artifact@v2
         with:
           name: Build
-          path: ${{ github.workspace }}/static/
+          path: ${{ github.workspace }}/staticFiles/
   job_2:
     name: Deploy
     needs: job_1
@@ -37,17 +37,6 @@ jobs:
           name: Build
       - name: Push static files
         run: |
-          TEMP_DIR=$(mktemp -d)
-          TARGET_BRANCH="release-build"
-          echo "Cloning destination git repository"
-          git config --global user.email ${{ secrets.EMAIL }}
-          git config --global user.name "devevignesh"
-          git clone -n "https://devevignesh:${{ secrets.GIT_API_TOKEN }}@github.com/devevignesh/react-hooks.git" --depth 1 "$TEMP_DIR"
-          cd "$TEMP_DIR"
-          git reset HEAD
-          git checkout HEAD "static"
-          cp -R ${{ github.workspace }}/static/ "$TEMP_DIR"/.
+          cd ${{ github.workspace }}
           ls
-          cd static
-          ls
-          git status
+          
