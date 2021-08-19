@@ -46,6 +46,8 @@ jobs:
           cd "$TEMP_DIR"
           git reset HEAD
           git checkout HEAD "static"
+          echo "show temp"
+          ls
           cp -R ${{ github.workspace }}/build/ "$TEMP_DIR"/.
           echo "build"
           cd build
