@@ -19,25 +19,24 @@ jobs:
       - name: Run build
         run: |
           yarn build
-          cp -R build/ ${{ github.workspace }}/static/
-          ls
-      - name: Upload build
-        uses: actions/upload-artifact@v2
-        with:
-          name: Build
-          path: ${{ github.workspace }}/static/
-  job_2:
-    name: Deploy
-    needs: job_1
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Download build
-        uses: actions/download-artifact@v2
-        with:
-          name: Build
-      - name: Push static files
-        run: |
-          cd ${{ github.workspace }}/
-          ls
+          cd ${{ github.workspace }}
+#       - name: Upload build
+#         uses: actions/upload-artifact@v2
+#         with:
+#           name: Build
+#           path: ${{ github.workspace }}/static/
+#   job_2:
+#     name: Deploy
+#     needs: job_1
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - name: Download build
+#         uses: actions/download-artifact@v2
+#         with:
+#           name: Build
+#       - name: Push static files
+#         run: |
+#           cd ${{ github.workspace }}/
+#           ls
           
