@@ -23,7 +23,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Build
-          path: ${{ github.workspace }}/build/
+          path: ${{ github.workspace }}/static/
   job_2:
     name: Deploy
     needs: job_1
@@ -34,7 +34,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: Build
-          path: ${{ github.workspace }}/build/
+          path: ${{ github.workspace }}/static/
       - name: Push static files
         run: |
           TEMP_DIR=$(mktemp -d)
@@ -45,7 +45,8 @@ jobs:
           git clone -n "https://devevignesh:${{ secrets.GIT_API_TOKEN }}@github.com/devevignesh/react-hooks.git" --depth 1 "$TEMP_DIR"
           cd "$TEMP_DIR"
           git reset HEAD
-          cp -R ${{ github.workspace }}/build/ "$TEMP_DIR"/.
+          git checkout HEAD "static"
+          cp -R ${{ github.workspace }}/static/ "$TEMP_DIR"/.
           cd build
           git add index.html static/
           git checkout -b "$TARGET_BRANCH"
