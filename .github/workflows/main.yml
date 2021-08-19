@@ -45,5 +45,5 @@ jobs:
           git clone -n "https://devevignesh:${{ secrets.GIT_API_TOKEN }}@github.com/devevignesh/react-hooks.git" --depth 1 "$TEMP_DIR"
           cd "$TEMP_DIR"
           git reset HEAD
-          cp -R ${{ github.workspace }}/build/ "$TEMP_DIR"/.
+          cp -R ${{ github.workspace }}/build/ "$TEMP_DIR"/
           ls
