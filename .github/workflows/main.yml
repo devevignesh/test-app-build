@@ -19,14 +19,11 @@ jobs:
       - name: Run build
         run: |
           yarn build
-          mkdir ${{ github.workspace }}/buildFiles
-          cd ${{ github.workspace }}
-          ls
-#       - name: Upload build
-#         uses: actions/upload-artifact@v2
-#         with:
-#           name: Build
-#           path: ${{ github.workspace }}/static/
+      - name: Upload build
+        uses: actions/upload-artifact@v2
+        with:
+          name: Build
+          path: ${{ github.workspace }}/build/
 #   job_2:
 #     name: Deploy
 #     needs: job_1
