@@ -46,7 +46,7 @@ jobs:
           cd "$TEMP_DIR"
           git reset HEAD
           git checkout HEAD "static"
-          cp -R ${{ github.workspace }}/static/ "$TEMP_DIR"/.
+          cp -R ${{ github.workspace }}/ "$TEMP_DIR"/.
           echo "Files that will be pushed"
           ls
           git add index.html static/
