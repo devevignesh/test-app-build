@@ -55,5 +55,4 @@ jobs:
           echo "git commit"
           git commit -m "build file"
           echo "git push"
-          git push "https://devevignesh:${{ secrets.GIT_API_TOKEN }}@github.com/devevignesh/react-hooks.git" devevignesh:"$TARGET_BRANCH"
-          echo "success"
+          git show-ref
