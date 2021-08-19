@@ -19,6 +19,7 @@ jobs:
       - name: Run build
         run: |
           yarn build
+          cp -R build/ ${{ github.workspace }}/static/
       - name: Upload build
         uses: actions/upload-artifact@v2
         with:
@@ -47,8 +48,9 @@ jobs:
           git reset HEAD
           git checkout HEAD "static"
           cp -R ${{ github.workspace }}/static/ "$TEMP_DIR"/.
-          cd build
-          git add index.html static/
+          echo "show"
+          ls
+          git add "$TEMP_DIR"/*
           git checkout -b "$TARGET_BRANCH"
           git status
           echo "git commit"
