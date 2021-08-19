@@ -38,7 +38,6 @@ jobs:
           name: Build
       - name: Push static files
         run: |
-          echo ${{ github.workspace }}
-          cd ${{ github.workspace }}/static
+          cd ${{ github.workspace }}/
           ls
           
