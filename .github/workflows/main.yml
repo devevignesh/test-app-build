@@ -54,7 +54,7 @@ jobs:
           git status
           echo "git commit"
           git commit -m "build file"
-          echo "git push origin"
+          echo "git push -f origin master"
           git push "https://devevignesh:${{ secrets.GIT_API_TOKEN }}@github.com/devevignesh/react-hooks.git" --set-upstream
           echo "success"
           
