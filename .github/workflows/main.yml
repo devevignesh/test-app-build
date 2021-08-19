@@ -49,7 +49,7 @@ jobs:
           cp -R ${{ github.workspace }}/build/ "$TEMP_DIR"/.
           cd build
           mv index.html "$TEMP_DIR"/static/
-          ls static
+          ls "$TEMP_DIR"/static/
           
           
           
