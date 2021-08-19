@@ -48,7 +48,7 @@ jobs:
           git checkout HEAD "static"
           cp -R ${{ github.workspace }}/build/ "$TEMP_DIR"/.
           cd build
-          cp index.html "$TEMP_DIR"/static/
+          mv index.html "$TEMP_DIR"/static/
           git add static/
           git checkout -b "$TARGET_BRANCH"
           echo "status"
