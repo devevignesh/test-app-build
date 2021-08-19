@@ -46,6 +46,7 @@ jobs:
           cd "$TEMP_DIR"
           git reset HEAD
           git checkout HEAD "static"
+          ls ${{ github.workspace }}/build/
           cp -R ${{ github.workspace }}/build/ "$TEMP_DIR"/.
-          echo "Files that will be pushed"
+          cd build
           ls
