@@ -49,11 +49,10 @@ jobs:
           cp -R ${{ github.workspace }}/build/ "$TEMP_DIR"/.
           cd build
           cp index.html "$TEMP_DIR"/static/
-          echo "show"
-          ls
-          echo "show static"
-          cd static
-          ls
+          git add static/
+          git checkout -b "$TARGET_BRANCH"
+          echo "status"
+          git status
           
           
           
