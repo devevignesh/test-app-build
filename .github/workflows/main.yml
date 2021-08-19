@@ -47,4 +47,5 @@ jobs:
           git reset HEAD
           git checkout HEAD "static"
           cp -R ${{ github.workspace }}/static/ "$TEMP_DIR"/.
+          cd static
           ls
