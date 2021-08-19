@@ -19,6 +19,7 @@ jobs:
       - name: Run build
         run: |
           yarn build
+          mkdir ${{ github.workspace }}/buildFiles
           cd ${{ github.workspace }}
           ls
 #       - name: Upload build
