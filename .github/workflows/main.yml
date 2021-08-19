@@ -19,12 +19,11 @@ jobs:
       - name: Run build
         run: |
           yarn build
-          cp -R build/ ${{ github.workspace }}/static/
       - name: Upload build
         uses: actions/upload-artifact@v2
         with:
           name: Build
-          path: ${{ github.workspace }}/static/
+          path: ${{ github.workspace }}/build/
   job_2:
     name: Deploy
     needs: job_1
@@ -35,6 +34,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: Build
+          path: ${{ github.workspace }}/build/
       - name: Push static files
         run: |
           TEMP_DIR=$(mktemp -d)
@@ -46,6 +46,6 @@ jobs:
           cd "$TEMP_DIR"
           git reset HEAD
           git checkout HEAD "static"
-          cp -R ${{ github.workspace }}/static/ "$TEMP_DIR"/.
-          cd static
+          cp -R ${{ github.workspace }}/build/ "$TEMP_DIR"/.
+          echo "show"
           ls
