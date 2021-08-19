@@ -20,6 +20,7 @@ jobs:
         run: |
           yarn build
           cd ${{ github.workspace }}
+          ls
 #       - name: Upload build
 #         uses: actions/upload-artifact@v2
 #         with:
