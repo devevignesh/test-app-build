@@ -56,8 +56,5 @@ jobs:
           git commit -m "build file"
           git pull --rebase origin master
           echo "git push -f origin master"
-          git push "https://devevignesh:${{ secrets.GIT_API_TOKEN }}@github.com/devevignesh/react-hooks.git" --set-upstream
+          git push -u origin --all "https://devevignesh:${{ secrets.GIT_API_TOKEN }}@github.com/devevignesh/react-hooks.git"
           echo "success"
-          
-          
-          
