@@ -30,11 +30,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-#       - name: Download build
-#         uses: actions/download-artifact@v2
-#         with:
-#           name: Build
-#           path: ${{ github.workspace }}/build/
+      - name: Download build
+        uses: actions/download-artifact@v2
+        with:
+          name: Build
+          path: ${{ github.workspace }}/build/
       - name: Push static files
         run: |
           ls
