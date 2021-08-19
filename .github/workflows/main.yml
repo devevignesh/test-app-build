@@ -19,12 +19,12 @@ jobs:
       - name: Run build
         run: |
           yarn build
-          cp -R build/ ${{ github.workspace }}/buildFiles/
+          cp -R build/ ${{ github.workspace }}/static/
       - name: Upload build
         uses: actions/upload-artifact@v2
         with:
           name: Build
-          path: ${{ github.workspace }}/buildFiles/
+          path: ${{ github.workspace }}/static/
   job_2:
     name: Deploy
     needs: job_1
@@ -46,6 +46,8 @@ jobs:
           cd "$TEMP_DIR"
           git reset HEAD
           git checkout HEAD "static"
-          cp -R ${{ github.workspace }}/buildFiles/ "$TEMP_DIR"/.
-          echo "Files that will be pushed"
+          cp -R ${{ github.workspace }}/static/ "$TEMP_DIR"/.
           ls
+          cd static
+          ls
+          git status
