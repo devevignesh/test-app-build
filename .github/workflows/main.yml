@@ -35,7 +35,6 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: Build
-          path: ${{ github.workspace }}/static/
       - name: Push static files
         run: |
           TEMP_DIR=$(mktemp -d)
@@ -48,8 +47,6 @@ jobs:
           git reset HEAD
           git checkout HEAD "static"
           cp -R ${{ github.workspace }}/static/ "$TEMP_DIR"/.
-          echo "show"
-          ls
           git add "$TEMP_DIR"/*
           git checkout -b "$TARGET_BRANCH"
           git status
