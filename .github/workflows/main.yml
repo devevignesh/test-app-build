@@ -45,7 +45,7 @@ jobs:
           git clone -n "https://devevignesh:${{ secrets.GIT_API_TOKEN }}@github.com/devevignesh/react-hooks.git" --depth 1 "$TEMP_DIR"
           cd "$TEMP_DIR"
           git reset HEAD
-          git checkAD "static"out HE
+          git checkout HEAD "static"
           cp -R ${{ github.workspace }}/build/* .
           mv index.html static/
           git add "$TEMP_DIR"/static/*
