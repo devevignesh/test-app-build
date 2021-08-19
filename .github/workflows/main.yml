@@ -45,5 +45,13 @@ jobs:
           git clone -n "https://devevignesh:${{ secrets.GIT_API_TOKEN }}@github.com/devevignesh/react-hooks.git" --depth 1 "$TEMP_DIR"
           cd "$TEMP_DIR"
           git reset HEAD
-          cp -R ${{ github.workspace }}/build/ "$TEMP_DIR"/
-          ls
+          cp -R ${{ github.workspace }}/build/ "$TEMP_DIR"/.
+          cd build
+          git add index.html static/
+          git checkout -b "$TARGET_BRANCH"
+          git status
+          echo "git commit"
+          git commit -m "static files"
+          echo "git push origin"
+          git push "https://devevignesh:${{ secrets.GIT_API_TOKEN }}@github.com/devevignesh/react-hooks.git" --set-upstream
+          echo "success"
