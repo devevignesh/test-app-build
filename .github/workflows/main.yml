@@ -19,12 +19,13 @@ jobs:
       - name: Run build
         run: |
           yarn build
-          cp -R build/ ${{ github.workspace }}/builds/
+          cp -R build/ ${{ github.workspace }}/static/
+          ls
       - name: Upload build
         uses: actions/upload-artifact@v2
         with:
           name: Build
-          path: ${{ github.workspace }}/builds/
+          path: ${{ github.workspace }}/static/
   job_2:
     name: Deploy
     needs: job_1
@@ -38,6 +39,6 @@ jobs:
       - name: Push static files
         run: |
           echo ${{ github.workspace }}
-          cd ${{ github.workspace }}/builds
+          cd ${{ github.workspace }}/static
           ls
           
