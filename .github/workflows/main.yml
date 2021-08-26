@@ -51,7 +51,7 @@ jobs:
           echo "show static folder"
           ls static
           cp -R ${{ github.workspace }}/build/* .
-          "echo show current"
+          echo "show current"
           ls
           mv index.html static/
           echo "show static"
