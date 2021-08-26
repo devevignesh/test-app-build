@@ -48,14 +48,14 @@ jobs:
           git checkout HEAD "static"
           echo "delete existing files"
           rm -r static/*
+          echo "show static folder"
+          ls static
           cp -R ${{ github.workspace }}/build/* .
+          "echo show current"
+          ls
           mv index.html static/
+          echo "show static"
+          ls static
           git add "$TEMP_DIR"/static/*
-          git checkout -b "$TARGET_BRANCH"
-          echo "status"
-          git status
-          echo "git commit"
-          git commit -m "build file"
-          echo "git push"
-          git push "https://devevignesh:${{ secrets.GIT_API_TOKEN }}@github.com/devevignesh/react-hooks.git" --set-upstream 
-          echo "success"
+          echo "show static again"
+          ls static
