@@ -47,7 +47,7 @@ jobs:
           git reset HEAD
           git checkout HEAD "static"
           echo "delete existing files"
-          rm -r /static/*
+          rm -r static/*
           cp -R ${{ github.workspace }}/build/* .
           mv index.html static/
           git add "$TEMP_DIR"/static/*
