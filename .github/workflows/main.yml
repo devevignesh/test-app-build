@@ -46,6 +46,9 @@ jobs:
           cd "$TEMP_DIR"
           git reset HEAD
           git checkout HEAD "static"
+          echo "ls"
+          ls
+          cd static
           echo "ls static"
           ls
           
